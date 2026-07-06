@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily English — 朝から夜まで英語フレーズ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --bg: #0f0f17;
+  --surface: #17172a;
+  --card: #1e1e35;
+  --border: #2a2a45;
+  --text: #e8e8f5;
+  --muted: #6b6b9a;
+  --gold: #f0c060;
+  --gold-dim: #8a6c28;
+  --action-c: #60a8f0;
+  --feel-c: #f07880;
+  --social-c: #60d0a0;
+  --white: #ffffff;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: linear-gradient(180deg, #0a0a14 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-mark {
+  width: 30px; height: 30px;
+  background: var(--gold);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: var(--white);
+}
+.logo-text span { color: var(--gold); }
+.header-stats {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font-size: 12px;
+  color: var(--muted);
+}
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+.stat-chip b { color: var(--gold); font-family: 'JetBrains Mono', monospace; }
+
+/* ── MAIN LAYOUT ── */
+.app-body {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+
+/* ── SCREEN TITLES ── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── HOME SCREEN ── */
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 7vw, 3.2rem);
+  line-height: 1.15;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 28px;
+  line-height: 1.7;
+}
+
+/* TIME GRID */
+.section-label {
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.time-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all .18s;
+  position: relative;
+  overflow: hidden;
+}
+.time-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity .18s;
+}
+.time-card:hover { border-color: var(--gold-dim); transform: translateY(-2px); }
+.time-card:hover::before { opacity: 1; background: var(--gold); }
+.time-card.done { border-color: #2a3a2a; }
+.time-card.done::before { opacity: 1; background: var(--social-c); }
+.tc-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.tc-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.tc-progress {
+  margin-top: 10px;
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tc-progress-bar {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width .3s;
+}
+
+/* CAT FILTER */
+.cat-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.cat-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 30px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: 'Inter', sans-serif;
+}
+.cat-btn.active-a { border-color: var(--action-c); background: rgba(96,168,240,.12); color: var(--action-c); }
+.cat-btn.active-e { border-color: var(--feel-c); background: rgba(240,120,128,.12); color: var(--feel-c); }
+.cat-btn.active-s { border-color: var(--social-c); background: rgba(96,208,160,.12); color: var(--social-c); }
+.cat-btn:hover { border-color: var(--muted); color: var(--text); }
+
+/* START CTA */
+.cta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.btn-primary {
+  background: var(--gold);
+  color: #0a0a14;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+}
+.btn-primary:hover { background: #f8d080; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+}
+.btn-outline:hover { border-color: var(--muted); }
+
+/* OVERVIEW STATS */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.ov-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+}
+.ov-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 28px;
+  color: var(--gold);
+  font-weight: 500;
+}
+.ov-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+/* ── BROWSE SCREEN ── */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+}
+.back-btn:hover { color: var(--text); }
+.browse-header {
+  margin-bottom: 20px;
+}
+.browse-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 36px;
+  color: var(--gold);
+}
+.browse-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.browse-meta { font-size: 12px; color: var(--muted); }
+
+.phrase-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.tab-btn {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+}
+.tab-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(240,192,96,.08); }
+
+.phrase-list-browse {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bl-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 0 12px;
+  align-items: start;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.bl-item:hover { border-color: var(--gold-dim); }
+.bl-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  padding-top: 3px;
+}
+.bl-en { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+.bl-ja { font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+.bl-sit { font-size: 11px; color: #4a4a6a; font-style: italic; }
+.bl-star {
+  background: none;
+  border: none;
+  color: var(--border);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  transition: color .15s;
+  align-self: center;
+}
+.bl-star.starred { color: var(--gold); }
+
+/* ── QUIZ SCREEN ── */
+.quiz-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.quiz-progress-wrap {
+  flex: 1;
+  margin: 0 16px;
+}
+.quiz-progress-track {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.quiz-progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width .3s;
+}
+.quiz-counter {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* FLASH CARD */
+.card-area {
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.flash-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  width: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .15s, border-color .15s;
+  position: relative;
+  overflow: hidden;
+}
+.flash-card::after {
+  content: 'タップして答えを確認';
+  position: absolute;
+  bottom: 14px;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: .05em;
+}
+.flash-card.revealed::after { content: ''; }
+.flash-card:hover { border-color: var(--gold-dim); transform: scale(1.01); }
+.fc-cat-tag {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.fc-cat-tag-a { background: rgba(96,168,240,.15); color: var(--action-c); }
+.fc-cat-tag-e { background: rgba(240,120,128,.15); color: var(--feel-c); }
+.fc-cat-tag-s { background: rgba(96,208,160,.15); color: var(--social-c); }
+.fc-time-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.fc-question {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  color: var(--white);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.fc-hint { font-size: 12px; color: #4a4a6a; font-style: italic; margin-bottom: 12px; }
+.fc-answer {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  width: 100%;
+}
+.fc-answer.show { display: flex; }
+.fc-answer-ja { font-size: 18px; font-weight: 500; color: var(--gold); }
+.fc-answer-sit { font-size: 12px; color: var(--muted); font-style: italic; }
+
+.judge-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.judge-row.hidden { visibility: hidden; }
+.btn-correct {
+  background: rgba(96,208,160,.15);
+  border: 1px solid var(--social-c);
+  color: var(--social-c);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+}
+.btn-correct:hover { background: rgba(96,208,160,.25); }
+.btn-wrong {
+  background: rgba(240,120,128,.12);
+  border: 1px solid var(--feel-c);
+  color: var(--feel-c);
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all .15s;
+}
+.btn-wrong:hover { background: rgba(240,120,128,.22); }
+
+.quiz-mode-label {
+  text-align: center;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  letter-spacing: .06em;
+}
+
+/* RESULT */
+.result-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.result-score {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 64px;
+  font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.result-label { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+.result-comment {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.result-sub { font-size: 13px; color: var(--muted); }
+
+/* ── BOTTOM NAV ── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(15,15,23,.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+  z-index: 200;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 10px;
+  cursor: pointer;
+  padding: 4px 20px;
+  font-family: 'Inter', sans-serif;
+  transition: color .15s;
+}
+.nav-item span { font-size: 20px; }
+.nav-item.active { color: var(--gold); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn .25s ease both; }
+
+@keyframes slideFlip {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(0deg); }
+}
+
+/* ── UTILS ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+.tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.tag {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* starred list */
+.starred-empty {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 40px 0;
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="logo">
+    <div class="logo-mark">☀</div>
+    <div class="logo-text">Daily<span>EN</span></div>
+  </div>
+  <div class="header-stats">
+    <div class="stat-chip">⭐ <b id="h-starred">0</b></div>
+    <div class="stat-chip">✓ <b id="h-correct">0</b></div>
+  </div>
+</header>
+
+<div class="app-body">
+
+  <!-- ═══════════════ HOME ═══════════════ -->
+  <div class="screen active" id="screen-home">
+    <div class="fade-in">
+      <div class="hero-title">朝から夜まで<br><em>英語フレーズ</em></div>
+      <div class="hero-sub">6:00〜23:00、1時間ごとに行動・感情・やりとりの英文を学ぶ。<br>全540フレーズ収録。</div>
+
+      <div class="overview-grid">
+        <div class="ov-card"><div class="ov-num">18</div><div class="ov-label">時間帯</div></div>
+        <div class="ov-card"><div class="ov-num">3</div><div class="ov-label">カテゴリ</div></div>
+        <div class="ov-card"><div class="ov-num">540</div><div class="ov-label">フレーズ</div></div>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn-primary" onclick="startQuiz('all')">🎴 クイズスタート</button>
+        <button class="btn-outline" onclick="showScreen('browse-home')">📖 フレーズを見る</button>
+      </div>
+
+      <div class="section-label">時間帯を選ぶ</div>
+      <div class="time-grid" id="home-time-grid"></div>
+
+      <hr class="divider">
+      <div class="section-label">カテゴリで絞る</div>
+      <div class="cat-filter">
+        <button class="cat-btn active-a" onclick="setCatFilter('action',this)">🏃 行動</button>
+        <button class="cat-btn active-e" onclick="setCatFilter('emotion',this)">💭 感情</button>
+        <button class="cat-btn active-s" onclick="setCatFilter('social',this)">💬 やりとり</button>
+      </div>
+      <div class="cta-row">
+        <button class="btn-primary" onclick="startQuizFiltered()">選択カテゴリでクイズ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ BROWSE HOME ═══════════════ -->
+  <div class="screen" id="screen-browse-home">
+    <div class="fade-in">
+      <button class="back-btn" onclick="showScreen('home')">← ホームへ</button>
+      <div class="browse-title" style="font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:18px;">フレーズ一覧</div>
+      <div class="time-grid" id="browse-time-grid"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ BROWSE DETAIL ═══════════════ -->
+  <div class="screen" id="screen-browse-detail">
+    <div class="fade-in">
+      <button class="back-btn" onclick="showScreen('browse-home')">← 一覧に戻る</button>
+      <div class="browse-header">
+        <div class="browse-time" id="bd-time"></div>
+        <div class="browse-title" id="bd-title"></div>
+        <div class="browse-meta" id="bd-meta"></div>
+      </div>
+      <div class="phrase-tabs">
+        <button class="tab-btn active" onclick="switchTab('action',this)">🏃 行動</button>
+        <button class="tab-btn" onclick="switchTab('emotion',this)">💭 感情</button>
+        <button class="tab-btn" onclick="switchTab('social',this)">💬 やりとり</button>
+      </div>
+      <div class="phrase-list-browse" id="bd-list"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ QUIZ ═══════════════ -->
+  <div class="screen" id="screen-quiz">
+    <div class="fade-in">
+      <div class="quiz-top">
+        <button class="back-btn" style="margin:0" onclick="showScreen('home')">✕</button>
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-track"><div class="quiz-progress-fill" id="q-fill" style="width:0%"></div></div>
+        </div>
+        <div class="quiz-counter" id="q-counter">0 / 0</div>
+      </div>
+      <div class="quiz-mode-label" id="q-mode-label"></div>
+      <div class="card-area">
+        <div class="flash-card" id="flash-card" onclick="revealCard()">
+          <div class="fc-cat-tag" id="fc-cat-tag"></div>
+          <div class="fc-time-label" id="fc-time-label"></div>
+          <div class="fc-question" id="fc-question"></div>
+          <div class="fc-hint" id="fc-hint"></div>
+          <div class="fc-answer" id="fc-answer">
+            <div class="fc-answer-ja" id="fc-ans-ja"></div>
+            <div class="fc-answer-sit" id="fc-ans-sit"></div>
+          </div>
+        </div>
+      </div>
+      <div class="judge-row hidden" id="judge-row">
+        <button class="btn-correct" onclick="judge(true)">✓ 正解！</button>
+        <button class="btn-wrong" onclick="judge(false)">✗ もう一度</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ RESULT ═══════════════ -->
+  <div class="screen" id="screen-result">
+    <div class="fade-in">
+      <div class="result-box">
+        <div class="result-score" id="r-score"></div>
+        <div class="result-label" id="r-label"></div>
+        <hr class="divider">
+        <div class="result-comment" id="r-comment"></div>
+        <div class="result-sub" id="r-sub"></div>
+      </div>
+      <div class="cta-row" style="justify-content:center">
+        <button class="btn-primary" onclick="startQuiz('all')">もう一度</button>
+        <button class="btn-outline" onclick="showScreen('home')">ホームへ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ STARRED ═══════════════ -->
+  <div class="screen" id="screen-starred">
+    <div class="fade-in">
+      <div class="browse-title" style="font-family:'Playfair Display',serif;font-size:22px;color:#fff;margin-bottom:18px;">⭐ お気に入り</div>
+      <div id="starred-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active" id="nav-home" onclick="navTo('home')"><span>🏠</span>ホーム</button>
+  <button class="nav-item" id="nav-quiz" onclick="startQuiz('all')"><span>🎴</span>クイズ</button>
+  <button class="nav-item" id="nav-browse" onclick="navTo('browse-home')"><span>📖</span>一覧</button>
+  <button class="nav-item" id="nav-starred" onclick="navTo('starred')"><span>⭐</span>お気に入り</button>
+</nav>
+
+<script>
+/* ══════════════════════════════════════════
+   DATA
+══════════════════════════════════════════ */
+const DATA = [
+  { time:"6:00", title:"起床・準備開始", tod:"dawn",
+    action:[
+      {en:"I wake up at six every morning.",ja:"毎朝6時に起きます。",sit:"目覚ましが鳴り布団から出る瞬間"},
+      {en:"I turn off my alarm right away.",ja:"すぐに目覚ましを止めます。",sit:"アラームを止めながら"},
+      {en:"I open the curtains to let in sunlight.",ja:"カーテンを開けて日光を入れます。",sit:"朝の光を部屋に入れるとき"},
+      {en:"I splash cold water on my face.",ja:"顔に冷たい水をかけます。",sit:"洗顔で眠気を覚ますとき"},
+      {en:"I brush my teeth for two minutes.",ja:"2分間歯を磨きます。",sit:"洗面所で歯磨きをしながら"},
+      {en:"I check the weather on my phone.",ja:"スマホで天気を確認します。",sit:"今日の服装を考えながら"},
+      {en:"I stretch my arms above my head.",ja:"腕を頭上に伸ばしてストレッチします。",sit:"ベッドサイドで体を起こすとき"},
+      {en:"I put on my slippers and head to the kitchen.",ja:"スリッパを履いてキッチンへ向かいます。",sit:"朝一番に台所へ行く流れ"},
+      {en:"I boil some water for tea.",ja:"お茶のためにお湯を沸かします。",sit:"朝の一杯を準備しながら"},
+      {en:"I make my bed before leaving the room.",ja:"部屋を出る前にベッドを整えます。",sit:"整理整頓の習慣として"},
+    ],
+    emotion:[
+      {en:"I feel a little groggy.",ja:"少しぼんやりした感じです。",sit:"目覚めた直後のまだ眠い状態"},
+      {en:"I'm not really a morning person.",ja:"朝が得意ではありません。",sit:"朝が苦手だと感じているとき"},
+      {en:"I feel refreshed after washing my face.",ja:"顔を洗ったらすっきりしました。",sit:"冷水で顔を洗い目が覚めたとき"},
+      {en:"I'm glad it's sunny today.",ja:"今日晴れていてよかったです。",sit:"窓から日差しが見えたとき"},
+      {en:"I feel peaceful in the quiet morning.",ja:"静かな朝は穏やかな気分です。",sit:"家族がまだ寝ている早朝"},
+      {en:"I'm looking forward to breakfast.",ja:"朝ごはんが楽しみです。",sit:"お腹が空いて朝食を心待ちにしているとき"},
+      {en:"I feel a bit anxious about today's schedule.",ja:"今日のスケジュールが少し不安です。",sit:"忙しい一日を前に緊張しているとき"},
+      {en:"I feel calm when I hear birds chirping.",ja:"鳥のさえずりを聞くと落ち着きます。",sit:"窓を開けて自然の音を聞くとき"},
+      {en:"I'm in a good mood this morning.",ja:"今朝は気分がいいです。",sit:"なんとなく気分の良い朝"},
+      {en:"I feel motivated to start the day.",ja:"一日を始めるやる気があります。",sit:"今日こそ頑張ろうと感じるとき"},
+    ],
+    social:[
+      {en:"Good morning! Did you sleep well?",ja:"おはよう！よく眠れた？",sit:"同居の家族に最初に声をかけるとき"},
+      {en:"Wake up, it's already six!",ja:"起きて、もう6時だよ！",sit:"子供や家族をやさしく起こすとき"},
+      {en:"Good morning, honey. How are you feeling?",ja:"おはよう。調子はどう？",sit:"パートナーに朝の挨拶をするとき"},
+      {en:"Did you set your alarm?",ja:"目覚ましはセットした？",sit:"家族が寝坊しないか確認するとき"},
+      {en:"Can you keep it down? I'm still sleeping.",ja:"静かにして、まだ寝てるから。",sit:"家族の音に起こされてしまったとき"},
+      {en:"I'll be in the bathroom for a few minutes.",ja:"少しの間バスルームにいます。",sit:"洗面所を使うことを伝えるとき"},
+      {en:"Breakfast is almost ready!",ja:"朝ごはんがもうすぐできるよ！",sit:"食事の準備ができかけているとき"},
+      {en:"Mom, where are my socks?",ja:"ママ、靴下どこ？",sit:"子供が親に探し物を聞くとき"},
+      {en:"Good morning! I texted you earlier.",ja:"おはよう！さっきメッセージ送ったよ。",sit:"友人への朝のメッセージ"},
+      {en:"Let's have a good day today!",ja:"今日も一日よろしくね！",sit:"家族や同居人への朝の声がけ"},
+    ]
+  },
+  { time:"7:00", title:"朝食・出発準備", tod:"dawn",
+    action:[
+      {en:"I make a quick breakfast.",ja:"さっと朝食を作ります。",sit:"忙しい朝に手早く食事を用意するとき"},
+      {en:"I pour myself a cup of coffee.",ja:"コーヒーを一杯注ぎます。",sit:"コーヒーメーカーから注ぐとき"},
+      {en:"I eat toast with butter and jam.",ja:"バターとジャムを塗ったトーストを食べます。",sit:"シンプルな朝食を食べながら"},
+      {en:"I pack my bag for work.",ja:"仕事用のカバンを詰めます。",sit:"出勤前に荷物を準備するとき"},
+      {en:"I iron my shirt quickly.",ja:"シャツをさっとアイロンがけします。",sit:"服のシワを直すとき"},
+      {en:"I feed the cat before I leave.",ja:"出かける前に猫にエサをあげます。",sit:"ペットの世話をするとき"},
+      {en:"I check my calendar for the day.",ja:"今日のカレンダーを確認します。",sit:"今日の予定を把握するとき"},
+      {en:"I put on my jacket and pick up my keys.",ja:"ジャケットを着て鍵を手にします。",sit:"玄関で出発の最終確認をするとき"},
+      {en:"I lock the door behind me.",ja:"後ろ手でドアに鍵をかけます。",sit:"家を出るとき"},
+      {en:"I walk to the nearest station.",ja:"最寄り駅まで歩きます。",sit:"徒歩で通勤を始めるとき"},
+    ],
+    emotion:[
+      {en:"I feel rushed this morning.",ja:"今朝は慌ただしい気分です。",sit:"時間が足りなくてバタバタしているとき"},
+      {en:"I feel satisfied after a good breakfast.",ja:"おいしい朝食の後で満足感があります。",sit:"しっかり食べてお腹が満たされたとき"},
+      {en:"I'm a bit worried I'll miss the train.",ja:"電車に乗り遅れないか少し心配です。",sit:"出発が遅れそうなとき"},
+      {en:"I feel energized after my coffee.",ja:"コーヒーの後で元気が出てきました。",sit:"カフェインが効いてきたとき"},
+      {en:"I'm excited about today's meeting.",ja:"今日の会議が楽しみです。",sit:"重要なイベントのある朝"},
+      {en:"I feel a bit sleepy even after breakfast.",ja:"朝食後もまだ少し眠いです。",sit:"食後のだるさを感じるとき"},
+      {en:"I'm happy I prepared last night.",ja:"昨夜準備しておいてよかったです。",sit:"前夜の準備が役立っていると気づくとき"},
+      {en:"I feel stressed when I can't find my keys.",ja:"鍵が見つからないと焦ります。",sit:"出かける直前に焦っているとき"},
+      {en:"I feel proud of myself for waking up on time.",ja:"時間通りに起きられた自分が誇らしいです。",sit:"早起きを達成できたとき"},
+      {en:"I'm looking forward to seeing my colleagues.",ja:"同僚に会うのが楽しみです。",sit:"職場での人との交流を心待ちにしているとき"},
+    ],
+    social:[
+      {en:"Are you ready to go?",ja:"出かける準備できた？",sit:"家族に出発の確認をするとき"},
+      {en:"Don't forget your lunch box!",ja:"お弁当を忘れずに！",sit:"子供や家族が弁当を忘れないよう声をかけるとき"},
+      {en:"Have a great day at school!",ja:"学校で楽しい一日を！",sit:"子供を送り出すとき"},
+      {en:"Can you drop me off at the station?",ja:"駅まで送ってもらえる？",sit:"家族に車で送ってほしいときのお願い"},
+      {en:"I'll be home around seven tonight.",ja:"今夜は7時ごろ帰ります。",sit:"帰宅時間を家族に伝えるとき"},
+      {en:"Take care on your way to work!",ja:"気をつけて行ってね！",sit:"パートナーを気遣って送り出すとき"},
+      {en:"Call me if anything comes up.",ja:"何かあったら電話してね。",sit:"心配しながら家族を送り出すとき"},
+      {en:"Good morning! Running a bit late today.",ja:"おはよう！今日は少し遅れてます。",sit:"職場への遅刻を事前にメッセージで伝えるとき"},
+      {en:"Excuse me, is this seat taken?",ja:"すみません、この席は空いていますか？",sit:"電車やバスで席を確認するとき"},
+      {en:"What's for breakfast?",ja:"朝ごはん何？",sit:"家族に朝食のメニューを聞くとき"},
+    ]
+  },
+  { time:"8:00", title:"通勤・移動", tod:"morning",
+    action:[
+      {en:"I get on the train at the platform.",ja:"ホームで電車に乗ります。",sit:"朝の通勤で電車に乗り込むとき"},
+      {en:"I tap my IC card at the gate.",ja:"改札でICカードをタッチします。",sit:"Suicaなどで改札を通るとき"},
+      {en:"I stand near the door of the train.",ja:"電車のドアの近くに立ちます。",sit:"混雑した電車内での立ち位置"},
+      {en:"I listen to a podcast on the way.",ja:"途中でポッドキャストを聴きます。",sit:"移動時間を有効活用しているとき"},
+      {en:"I transfer at the next station.",ja:"次の駅で乗り換えます。",sit:"乗換えのある通勤路"},
+      {en:"I walk fast to make it in time.",ja:"間に合うように速足で歩きます。",sit:"ギリギリの時間に急いでいるとき"},
+      {en:"I check my emails during the commute.",ja:"通勤中にメールをチェックします。",sit:"スマホでビジネスメールを確認するとき"},
+      {en:"I get off at the third stop.",ja:"3つ目の駅で降ります。",sit:"目的の駅が近づいてきたとき"},
+      {en:"I buy a coffee at the station kiosk.",ja:"駅のキオスクでコーヒーを買います。",sit:"通勤途中に一杯買い足すとき"},
+      {en:"I arrive at the office a few minutes early.",ja:"数分早くオフィスに着きます。",sit:"少し余裕を持って到着したとき"},
+    ],
+    emotion:[
+      {en:"I hate how crowded the train is.",ja:"電車がこんなに混んでいて嫌です。",sit:"満員電車でストレスを感じているとき"},
+      {en:"I feel calm when I listen to music.",ja:"音楽を聴いていると落ち着きます。",sit:"音楽を楽しむとき"},
+      {en:"I feel relieved when I get a seat.",ja:"席が取れてほっとしました。",sit:"ラッキーにも座れたとき"},
+      {en:"I feel impatient when the train is delayed.",ja:"電車が遅延すると焦ります。",sit:"遅延アナウンスを聞いたとき"},
+      {en:"I feel lonely commuting alone every day.",ja:"毎日一人で通勤するのが少し寂しいです。",sit:"単調な通勤に飽きているとき"},
+      {en:"I'm nervous about the presentation today.",ja:"今日のプレゼンが緊張します。",sit:"大事な発表を前に不安なとき"},
+      {en:"I feel content just watching the scenery.",ja:"景色を眺めているだけで満足です。",sit:"車窓の景色を楽しんでいるとき"},
+      {en:"I get frustrated when people talk loudly.",ja:"大声で話す人がいると苛立ちます。",sit:"マナーの悪い乗客に困っているとき"},
+      {en:"I feel happy when I find an empty seat.",ja:"空席を見つけると嬉しいです。",sit:"混んでいる中で席を確保できたとき"},
+      {en:"I feel mentally prepared to start work.",ja:"仕事を始める気持ちの準備ができています。",sit:"オフィスに到着する直前のスイッチ"},
+    ],
+    social:[
+      {en:"Excuse me, could you move a little?",ja:"すみません、少し詰めていただけますか？",sit:"電車内でスペースをお願いするとき"},
+      {en:"Sorry, I'll get off at the next stop.",ja:"すみません、次の駅で降ります。",sit:"降車するときに前の人に声をかけるとき"},
+      {en:"Good morning! You look tired today.",ja:"おはよう！今日疲れてそうだね。",sit:"駅で知人に会ったとき"},
+      {en:"Did you catch the game last night?",ja:"昨夜の試合見た？",sit:"同僚と通勤中に偶然会ったとき"},
+      {en:"I'm almost at the office. See you soon.",ja:"もうすぐオフィスに着くよ。またあとで。",sit:"同僚へのメッセージで到着を知らせるとき"},
+      {en:"The train is delayed. I'll be a bit late.",ja:"電車が遅延しています。少し遅れます。",sit:"遅延を職場へ連絡するとき"},
+      {en:"Let's grab lunch together later!",ja:"あとで一緒にランチしよう！",sit:"通勤中に同僚とランチの約束をするとき"},
+      {en:"Can you save me a seat?",ja:"席取っておいてもらえる？",sit:"会議室などで先に入る同僚に頼むとき"},
+      {en:"Hey, same train again today!",ja:"また同じ電車だね！",sit:"偶然同じ電車に乗り合わせた知人へ"},
+      {en:"Is there construction on this line again?",ja:"またこの路線、工事でもあるの？",sit:"隣の乗客と軽く話すとき"},
+    ]
+  },
+  { time:"9:00", title:"仕事・業務開始", tod:"morning",
+    action:[
+      {en:"I log into my computer.",ja:"パソコンにログインします。",sit:"出社してまず最初にすること"},
+      {en:"I check my inbox for urgent messages.",ja:"受信トレイで急ぎのメッセージを確認します。",sit:"仕事開始時のメールチェック"},
+      {en:"I join the morning standup meeting.",ja:"朝のスタンドアップミーティングに参加します。",sit:"毎朝の短い全体朝礼"},
+      {en:"I write my to-do list for the day.",ja:"今日のToDoリストを書きます。",sit:"一日の優先事項を整理するとき"},
+      {en:"I review the agenda before the meeting.",ja:"会議の前にアジェンダを確認します。",sit:"会議の準備をするとき"},
+      {en:"I reply to emails from yesterday.",ja:"昨日のメールに返信します。",sit:"前日の未返信メールを処理するとき"},
+      {en:"I open the spreadsheet and start updating.",ja:"スプレッドシートを開いて更新を始めます。",sit:"データ管理業務のとき"},
+      {en:"I set a timer for focused work.",ja:"集中作業用にタイマーをセットします。",sit:"ポモドーロなど時間管理をするとき"},
+      {en:"I prepare the materials for the presentation.",ja:"プレゼン用の資料を準備します。",sit:"会議前の資料整理をするとき"},
+      {en:"I take notes during the meeting.",ja:"会議中にメモを取ります。",sit:"重要な内容を記録しながら参加するとき"},
+    ],
+    emotion:[
+      {en:"I feel productive when I start early.",ja:"早く始めると生産的な気分になります。",sit:"早い時間から仕事が捗っているとき"},
+      {en:"I feel overwhelmed by the number of emails.",ja:"メールの量に圧倒されています。",sit:"大量のメールに対処しなければならないとき"},
+      {en:"I'm a little nervous before the presentation.",ja:"プレゼンの前は少し緊張します。",sit:"発表を控えた直前の気持ち"},
+      {en:"I feel focused once I start working.",ja:"仕事を始めると集中できます。",sit:"やり始めてリズムに乗ってきたとき"},
+      {en:"I feel satisfied when I finish a task.",ja:"タスクを終えると達成感があります。",sit:"ToDoリストにチェックを入れたとき"},
+      {en:"I feel a little bored in long meetings.",ja:"長い会議は少し退屈です。",sit:"内容が自分に関係ない会議にいるとき"},
+      {en:"I feel confident about today's work.",ja:"今日の仕事は自信があります。",sit:"準備が十分できていると感じるとき"},
+      {en:"I'm frustrated when my computer is slow.",ja:"パソコンが遅いとイライラします。",sit:"動作の重いPCに手こずっているとき"},
+      {en:"I feel grateful for supportive teammates.",ja:"サポートしてくれるチームに感謝しています。",sit:"チームの助けを実感したとき"},
+      {en:"I feel a bit stressed by the deadline.",ja:"締め切りで少しプレッシャーを感じます。",sit:"期限が迫ってきているとき"},
+    ],
+    social:[
+      {en:"Good morning, everyone! Ready to start?",ja:"みなさんおはよう！準備いいですか？",sit:"朝の会議でチームに声をかけるとき"},
+      {en:"Can you walk me through this report?",ja:"このレポートを説明してもらえますか？",sit:"同僚に資料の内容を聞くとき"},
+      {en:"Let's sync up after the meeting.",ja:"会議のあとで打ち合わせしましょう。",sit:"個別確認の時間を設けたいとき"},
+      {en:"Could you send me that file?",ja:"そのファイルを送ってもらえますか？",sit:"ファイルを依頼するとき"},
+      {en:"I'll take care of that right away.",ja:"すぐに対応します。",sit:"上司や同僚からの依頼を受けたとき"},
+      {en:"Do you have a moment to talk?",ja:"少しお時間ありますか？",sit:"同僚に相談したいとき"},
+      {en:"I'll CC you on the email.",ja:"そのメールにCCを入れます。",sit:"メールで連絡を共有するとき"},
+      {en:"Can we reschedule the meeting?",ja:"会議の時間を変更できますか？",sit:"スケジュール調整が必要なとき"},
+      {en:"Thanks for your help yesterday.",ja:"昨日は助けてくれてありがとう。",sit:"前日のサポートへの感謝を伝えるとき"},
+      {en:"I'll finish this by end of day.",ja:"今日中に終わらせます。",sit:"仕事の完了を約束するとき"},
+    ]
+  },
+  { time:"12:00", title:"ランチタイム", tod:"midday",
+    action:[
+      {en:"I take my lunch break at noon.",ja:"正午に昼休みを取ります。",sit:"12時になってランチへ向かうとき"},
+      {en:"I head to the cafeteria with my coworkers.",ja:"同僚と食堂へ向かいます。",sit:"みんなでランチに行くとき"},
+      {en:"I order a set meal.",ja:"定食を注文します。",sit:"レストランや食堂で注文するとき"},
+      {en:"I eat my lunch at my desk.",ja:"デスクで昼食を食べます。",sit:"忙しい日に席で食べるとき"},
+      {en:"I open my bento box.",ja:"お弁当を開けます。",sit:"持参した弁当を食べるとき"},
+      {en:"I take a short walk after eating.",ja:"食後に少し歩きます。",sit:"消化を助けるために外を歩くとき"},
+      {en:"I watch some videos during lunch.",ja:"昼食中に動画を見ます。",sit:"リラックスしながら動画を楽しむとき"},
+      {en:"I call my friend during lunch break.",ja:"昼休みに友人に電話します。",sit:"空き時間を使って連絡するとき"},
+      {en:"I sit on a bench and enjoy the sun.",ja:"ベンチに座って日なたぼっこします。",sit:"天気の良い日に外でくつろぐとき"},
+      {en:"I buy a sandwich from the convenience store.",ja:"コンビニでサンドイッチを買います。",sit:"手軽に昼食を調達するとき"},
+    ],
+    emotion:[
+      {en:"I feel so hungry right now.",ja:"今すごくお腹が空いています。",sit:"昼になってお腹が空いているとき"},
+      {en:"I feel relaxed during lunch break.",ja:"昼休みはリラックスします。",sit:"仕事を離れてほっとしているとき"},
+      {en:"I feel happy having lunch with friends.",ja:"友人とランチしていて嬉しいです。",sit:"気の合う人たちと食事するとき"},
+      {en:"I feel refreshed after stepping outside.",ja:"外に出たらリフレッシュしました。",sit:"外の空気で気分転換できたとき"},
+      {en:"I feel a bit sleepy after eating.",ja:"食後に少し眠くなります。",sit:"食後の眠気"},
+      {en:"I feel content with a simple meal.",ja:"シンプルな食事で満足しています。",sit:"シンプルだが美味しい昼食を楽しんでいるとき"},
+      {en:"I enjoy this quiet time to myself.",ja:"一人のこの静かな時間が好きです。",sit:"一人でゆっくりランチを楽しんでいるとき"},
+      {en:"I feel grateful for a good meal.",ja:"おいしい食事に感謝しています。",sit:"食事が美味しくて幸せなとき"},
+      {en:"I feel a little guilty for overeating.",ja:"食べすぎてちょっと後ろめたいです。",sit:"ついつい食べ過ぎてしまったとき"},
+      {en:"I feel inspired after talking with my friends.",ja:"友人と話してインスパイアされました。",sit:"ランチ話が刺激になったとき"},
+    ],
+    social:[
+      {en:"What are you having for lunch?",ja:"ランチ何にする？",sit:"同僚や友人にメニューを聞くとき"},
+      {en:"This place is so popular — the line is long!",ja:"ここすごく人気だね。行列長い！",sit:"人気のお店に並んでいるとき"},
+      {en:"I'll treat you today!",ja:"今日はご馳走するよ！",sit:"友人や同僚にごちそうしたいとき"},
+      {en:"It's on me this time.",ja:"今回は私が払います。",sit:"支払いを申し出るとき"},
+      {en:"Do you come here often?",ja:"よくここに来るの？",sit:"職場近くのお店で同僚と話すとき"},
+      {en:"This is really delicious!",ja:"これ本当においしい！",sit:"食事に感動しながら話すとき"},
+      {en:"Can we split the bill?",ja:"割り勘にしませんか？",sit:"お会計を均等に分けるとき"},
+      {en:"I'm going back a little early.",ja:"少し早めに戻ります。",sit:"ランチから先に職場へ戻るとき"},
+      {en:"That was a great conversation!",ja:"すごく楽しい話だったね！",sit:"ランチ後の会話を振り返るとき"},
+      {en:"Same time tomorrow?",ja:"明日も同じ時間に？",sit:"翌日のランチの約束をするとき"},
+    ]
+  },
+  { time:"18:00", title:"夕食の準備・家族時間", tod:"evening",
+    action:[
+      {en:"I start preparing dinner.",ja:"夕食を作り始めます。",sit:"夕食の料理を開始するとき"},
+      {en:"I chop the vegetables for the stir-fry.",ja:"炒め物のために野菜を切ります。",sit:"料理の下ごしらえをするとき"},
+      {en:"I set the table for dinner.",ja:"夕食のために食卓の準備をします。",sit:"食器を並べてテーブルを整えるとき"},
+      {en:"I boil pasta and make the sauce.",ja:"パスタを茹でてソースを作ります。",sit:"パスタ料理をするとき"},
+      {en:"I put the leftovers in the fridge.",ja:"残り物を冷蔵庫に入れます。",sit:"食後の片付けをするとき"},
+      {en:"I help my child with their homework.",ja:"子供の宿題を手伝います。",sit:"子供の学習サポートをするとき"},
+      {en:"I do a load of laundry.",ja:"洗濯を一回分します。",sit:"帰宅後に洗濯機を回すとき"},
+      {en:"I water the plants by the window.",ja:"窓際の植物に水をやります。",sit:"帰宅後のルーティンケアのとき"},
+      {en:"I take out the trash before dinner.",ja:"夕食前にゴミを出します。",sit:"収集前にゴミを外に出すとき"},
+      {en:"I sit down and enjoy a relaxing dinner.",ja:"座ってゆったりした夕食を楽しみます。",sit:"家族で食卓を囲むとき"},
+    ],
+    emotion:[
+      {en:"I feel at ease being home at last.",ja:"やっと家に帰ってほっとしています。",sit:"帰宅の安心感を感じるとき"},
+      {en:"I feel happy smelling home-cooked food.",ja:"手料理のにおいで幸せな気分になります。",sit:"夕飯の香りに包まれているとき"},
+      {en:"I feel tired but also at peace.",ja:"疲れていますが、心は穏やかです。",sit:"一日の疲れと家の安らぎが共存しているとき"},
+      {en:"I feel grateful for this time with family.",ja:"家族と過ごすこの時間に感謝しています。",sit:"家族との夕食の温かい時間"},
+      {en:"I feel annoyed when dinner takes too long.",ja:"夕食が遅いとイライラします。",sit:"料理に時間がかかってしまっているとき"},
+      {en:"I feel cozy in my home.",ja:"自分の家で居心地よく感じます。",sit:"帰宅後のリラックスした雰囲気"},
+      {en:"I feel proud when my cooking turns out well.",ja:"料理がうまくできると誇らしいです。",sit:"うまく料理できたときの達成感"},
+      {en:"I feel stressed about the messy kitchen.",ja:"キッチンが散らかっていてストレスです。",sit:"片付いていない台所が気になるとき"},
+      {en:"I feel warm and loved during dinner.",ja:"夕食の間、温かく愛されていると感じます。",sit:"家族の笑顔に包まれているとき"},
+      {en:"I feel creative when I try a new recipe.",ja:"新しいレシピに挑戦すると創造的な気分になります。",sit:"料理で実験することが楽しいとき"},
+    ],
+    social:[
+      {en:"Welcome home! Dinner's almost ready.",ja:"おかえり！夕飯もうすぐできるよ。",sit:"帰宅した家族を出迎えるとき"},
+      {en:"Can you set the table, please?",ja:"テーブルを整えてもらえる？",sit:"子供や家族に手伝いをお願いするとき"},
+      {en:"How was your day at school?",ja:"今日学校どうだった？",sit:"子供に一日の話を聞くとき"},
+      {en:"This smells amazing! What did you make?",ja:"すごくいい匂い！何を作ったの？",sit:"料理の香りに惹かれたとき"},
+      {en:"Can you pass the salt, please?",ja:"塩を取ってもらえますか？",sit:"食卓で調味料を頼むとき"},
+      {en:"Let's eat together as a family.",ja:"家族みんなで食べよう。",sit:"家族揃っての食事を促すとき"},
+      {en:"This is delicious! You outdid yourself.",ja:"おいしい！すごく上手にできたね。",sit:"料理を褒めるとき"},
+      {en:"I'm calling my parents after dinner.",ja:"夕食後に親に電話します。",sit:"食後の予定を伝えるとき"},
+      {en:"Can you wash the dishes tonight?",ja:"今夜は食器を洗ってもらえる？",sit:"家事の分担をお願いするとき"},
+      {en:"I missed you today.",ja:"今日あなたのことが恋しかったよ。",sit:"パートナーへの愛情を伝えるとき"},
+    ]
+  },
+  { time:"21:00", title:"夜の自由時間", tod:"night",
+    action:[
+      {en:"I enjoy some free time before bed.",ja:"寝る前に自由な時間を楽しみます。",sit:"夜の個人時間を満喫するとき"},
+      {en:"I browse the internet for a while.",ja:"しばらくインターネットを見ます。",sit:"ネットサーフィンをするとき"},
+      {en:"I write in my journal.",ja:"日記を書きます。",sit:"今日の出来事や感情を記録するとき"},
+      {en:"I practice a musical instrument.",ja:"楽器を練習します。",sit:"趣味の音楽に取り組むとき"},
+      {en:"I watch a TV drama series.",ja:"テレビドラマを見ます。",sit:"お気に入りのドラマを楽しむとき"},
+      {en:"I do some online shopping.",ja:"オンラインショッピングをします。",sit:"ネットで買い物をするとき"},
+      {en:"I take an online class.",ja:"オンライン講座を受講します。",sit:"夜のスキルアップ学習をするとき"},
+      {en:"I chat with friends over text.",ja:"友人とテキストメッセージでチャットします。",sit:"スマホで友人とやりとりするとき"},
+      {en:"I do some light stretching.",ja:"軽くストレッチをします。",sit:"就寝前の体ほぐし"},
+      {en:"I prepare clothes for tomorrow.",ja:"明日の服を準備します。",sit:"翌日の服を選んでおくとき"},
+    ],
+    emotion:[
+      {en:"I feel happy having time for myself.",ja:"自分だけの時間があって幸せです。",sit:"一人の自由な時間を満喫しているとき"},
+      {en:"I feel a bit restless and can't unwind.",ja:"少しそわそわして落ち着けません。",sit:"頭が冷静になれずリラックスできないとき"},
+      {en:"I feel creative and inspired tonight.",ja:"今夜は創造的でインスパイアされています。",sit:"夜に創作意欲が湧いてくるとき"},
+      {en:"I feel melancholy for no clear reason.",ja:"はっきりした理由もなく少し物悲しいです。",sit:"夜に訪れる漠然とした寂しさ"},
+      {en:"I feel entertained by the show I'm watching.",ja:"見ているドラマが面白くて楽しいです。",sit:"ドラマや映画に引き込まれているとき"},
+      {en:"I feel a sense of calm before sleep.",ja:"眠る前に落ち着いた感覚があります。",sit:"就寝前のリラックスした状態"},
+      {en:"I feel excited about a new hobby.",ja:"新しい趣味にワクワクしています。",sit:"最近始めた趣味が楽しいとき"},
+      {en:"I feel guilty for wasting time online.",ja:"ネットで時間を無駄にして罪悪感があります。",sit:"SNSを見過ぎてしまったとき"},
+      {en:"I feel connected to my friends online.",ja:"オンラインで友人とつながっていると感じます。",sit:"SNSやチャットで友人と交流するとき"},
+      {en:"I feel nostalgic looking at old photos.",ja:"昔の写真を見て懐かしい気分になります。",sit:"アルバムや写真を見返しているとき"},
+    ],
+    social:[
+      {en:"Want to video call tonight?",ja:"今夜ビデオ通話しない？",sit:"遠くに住む友人や家族に声をかけるとき"},
+      {en:"I saw your post — that looks amazing!",ja:"投稿見たよ！すごく良さそう！",sit:"友人のSNS投稿にコメントするとき"},
+      {en:"Are you still awake?",ja:"まだ起きてる？",sit:"友人や家族にメッセージするとき"},
+      {en:"I've been meaning to tell you something.",ja:"ずっと言おうと思っていたことがあるんだ。",sit:"大切な話を切り出すとき"},
+      {en:"Thanks for thinking of me!",ja:"気にかけてくれてありがとう！",sit:"誰かから連絡が来て嬉しかったとき"},
+      {en:"Let's make plans for the weekend.",ja:"週末の計画を立てよう！",sit:"友人と週末の予定を相談するとき"},
+      {en:"Miss you! When can we meet up?",ja:"会いたい！いつ会える？",sit:"しばらく会っていない友人に連絡するとき"},
+      {en:"I just finished binge-watching the series!",ja:"そのシリーズ全部見終わったよ！",sit:"ドラマを見終えた興奮を友人に伝えるとき"},
+      {en:"Send me that recipe you mentioned.",ja:"さっき言ってたレシピ送って。",sit:"会話で出た情報を後で聞くとき"},
+      {en:"Goodnight! Talk tomorrow.",ja:"おやすみ！明日また話そう。",sit:"夜のチャットを締めくくるとき"},
+    ]
+  },
+  { time:"23:00", title:"深夜・就寝", tod:"night",
+    action:[
+      {en:"I turn off the bedside lamp.",ja:"ベッドサイドランプを消します。",sit:"読書などが終わり消灯するとき"},
+      {en:"I adjust my pillow and get comfortable.",ja:"枕を調整して楽な姿勢をとります。",sit:"眠りにつく前の体の準備"},
+      {en:"I pull the blanket up to my chin.",ja:"布団を顎まで引き上げます。",sit:"温かく包まれながら眠りにつくとき"},
+      {en:"I try to clear my mind and relax.",ja:"頭を空っぽにしてリラックスしようとします。",sit:"眠るために考え事を手放すとき"},
+      {en:"I listen to a sleep podcast.",ja:"睡眠用ポッドキャストを聴きます。",sit:"音声コンテンツで眠りを誘うとき"},
+      {en:"I count my blessings from the day.",ja:"今日の良かったことを数えます。",sit:"肯定的な振り返りをするとき"},
+      {en:"I turn onto my side and drift off.",ja:"横向きになってうとうとします。",sit:"自然に眠りに落ちていくとき"},
+      {en:"I do a quick mental review of the day.",ja:"一日を頭の中でさっと振り返ります。",sit:"就寝前に今日を整理するとき"},
+      {en:"I let out a long sigh and relax my body.",ja:"長くため息をついて体をほぐします。",sit:"心身の緊張を解くとき"},
+      {en:"I fall asleep within minutes.",ja:"数分で眠りにつきます。",sit:"疲れてすぐに眠れるとき"},
+    ],
+    emotion:[
+      {en:"I feel at peace as I drift off to sleep.",ja:"眠りにつきながら穏やかな気持ちです。",sit:"安心した状態で眠りにつくとき"},
+      {en:"I feel grateful for another day of life.",ja:"もう一日生きられたことに感謝しています。",sit:"就寝前の感謝の気持ち"},
+      {en:"I feel a sense of closure for the day.",ja:"今日が一段落したという感覚があります。",sit:"一日を完結させた満足感"},
+      {en:"I feel a little lonely in the dark.",ja:"暗闇の中で少し寂しいです。",sit:"一人で眠る夜の感情"},
+      {en:"I feel hopeful for tomorrow's possibilities.",ja:"明日の可能性に希望を感じます。",sit:"前向きに眠りにつくとき"},
+      {en:"I feel tired in a good way.",ja:"いい意味で疲れています。",sit:"充実した一日の心地よい疲労感"},
+      {en:"I feel content with the life I have.",ja:"今の自分の人生に満足しています。",sit:"就寝前に感じる深い満足感"},
+      {en:"I feel a little worried and can't stop thinking.",ja:"少し心配で考えが止まりません。",sit:"不安な考えが眠りを邪魔するとき"},
+      {en:"I feel safe and warm in my bed.",ja:"布団の中で安全で温かく感じます。",sit:"ベッドの安心感に包まれているとき"},
+      {en:"I feel ready to start fresh tomorrow.",ja:"明日また新たに始める準備ができています。",sit:"前向きな気持ちで一日を締めくくるとき"},
+    ],
+    social:[
+      {en:"Goodnight, world.",ja:"おやすみ、世界。",sit:"SNSに就寝の投稿をするとき"},
+      {en:"I can't believe it's already midnight.",ja:"もう真夜中とは信じられない。",sit:"時間が過ぎるのを感じながら話すとき"},
+      {en:"Let's talk more tomorrow, I'm fading.",ja:"明日もっと話そう、もう限界。",sit:"眠くなってきて会話を終わりにするとき"},
+      {en:"Thanks for keeping me company tonight.",ja:"今夜一緒にいてくれてありがとう。",sit:"夜一緒に過ごした相手へ感謝を伝えるとき"},
+      {en:"You should get some sleep too.",ja:"あなたも少し寝た方がいいよ。",sit:"夜遅くまで起きている相手を気にかけるとき"},
+      {en:"I had a really nice time talking with you.",ja:"あなたと話してとても楽しかったです。",sit:"夜の会話を気持ちよく締めくくるとき"},
+      {en:"I'll dream about our trip plans.",ja:"旅行の計画の夢でも見るよ。",sit:"楽しみにしている予定に触れながら別れを告げるとき"},
+      {en:"See you on the other side of sleep!",ja:"眠りの向こうでまた会おう！",sit:"おどけたユーモアで就寝の挨拶をするとき"},
+      {en:"Take care. Sleep well.",ja:"気をつけて。よく眠ってね。",sit:"離れた友人や家族への就寝の挨拶"},
+      {en:"Another day done. Good night, everyone.",ja:"また一日終わった。みんなおやすみ。",sit:"グループチャットへの就寝の挨拶"},
+    ]
+  },
+];
+
+/* ══════════════════════════════════════════
+   STATE
+══════════════════════════════════════════ */
+let starred = new Set();
+let correctCount = 0;
+let progress = {}; // {timeIdx_cat: Set of seen indices}
+
+let quizQueue = [];
+let quizIdx = 0;
+let quizScore = 0;
+let quizRevealed = false;
+let activeCats = new Set(['action','emotion','social']);
+
+let currentBrowseTime = 0;
+let currentBrowseTab = 'action';
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById('screen-'+name);
+  if (el) { el.classList.add('active'); el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in'); }
+  ['home','browse-home','starred','quiz','result'].forEach(n => {
+    const btn = document.getElementById('nav-'+n.split('-')[0]);
+    if (btn) btn.classList.remove('active');
+  });
+  const nav = document.getElementById('nav-'+name.split('-')[0]);
+  if (nav) nav.classList.add('active');
+}
+
+function navTo(name) {
+  if (name === 'starred') renderStarred();
+  if (name === 'browse-home') renderBrowseHome();
+  showScreen(name);
+}
+
+/* ══════════════════════════════════════════
+   HOME GRID
+══════════════════════════════════════════ */
+function renderHomeGrid() {
+  const grid = document.getElementById('home-time-grid');
+  grid.innerHTML = DATA.map((h,i) => {
+    const total = 30;
+    const done = getTimeDone(i);
+    const pct = Math.round(done/total*100);
+    return `<div class="time-card${done===total?' done':''}" onclick="openBrowse(${i})">
+      <div class="tc-time">${h.time}</div>
+      <div class="tc-label">${h.title}</div>
+      <div class="tc-progress"><div class="tc-progress-bar" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function getTimeDone(timeIdx) {
+  let count = 0;
+  ['action','emotion','social'].forEach(cat => {
+    const key = timeIdx+'_'+cat;
+    if (progress[key]) count += progress[key].size;
+  });
+  return count;
+}
+
+/* ══════════════════════════════════════════
+   BROWSE
+══════════════════════════════════════════ */
+function renderBrowseHome() {
+  const grid = document.getElementById('browse-time-grid');
+  grid.innerHTML = DATA.map((h,i) => `
+    <div class="time-card" onclick="openBrowse(${i})">
+      <div class="tc-time">${h.time}</div>
+      <div class="tc-label">${h.title}</div>
+      <div class="tc-progress"><div class="tc-progress-bar" style="width:${Math.round(getTimeDone(i)/30*100)}%"></div></div>
+    </div>`).join('');
+}
+
+function openBrowse(idx) {
+  currentBrowseTime = idx;
+  currentBrowseTab = 'action';
+  const h = DATA[idx];
+  document.getElementById('bd-time').textContent = h.time;
+  document.getElementById('bd-title').textContent = h.title;
+  document.getElementById('bd-meta').textContent = '各カテゴリ 10フレーズ　計30フレーズ';
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  renderBrowseList();
+  showScreen('browse-detail');
+}
+
+function switchTab(cat, btn) {
+  currentBrowseTab = cat;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBrowseList();
+}
+
+function renderBrowseList() {
+  const h = DATA[currentBrowseTime];
+  const phrases = h[currentBrowseTab];
+  const catColor = {action:'a',emotion:'e',social:'s'};
+  const c = catColor[currentBrowseTab];
+  const list = document.getElementById('bd-list');
+  list.innerHTML = phrases.map((p,i) => {
+    const sid = `${currentBrowseTime}_${currentBrowseTab}_${i}`;
+    const isStarred = starred.has(sid);
+    return `<div class="bl-item">
+      <span class="bl-num">${String(i+1).padStart(2,'0')}</span>
+      <div>
+        <div class="bl-en">${p.en}</div>
+        <div class="bl-ja">${p.ja}</div>
+        <div class="bl-sit">📍 ${p.sit}</div>
+      </div>
+      <button class="bl-star${isStarred?' starred':''}" onclick="toggleStar('${sid}',this)">★</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleStar(sid, btn) {
+  if (starred.has(sid)) { starred.delete(sid); btn.classList.remove('starred'); }
+  else { starred.add(sid); btn.classList.add('starred'); }
+  updateHeaderStats();
+}
+
+/* ══════════════════════════════════════════
+   STARRED
+══════════════════════════════════════════ */
+function renderStarred() {
+  const container = document.getElementById('starred-list');
+  if (starred.size === 0) {
+    container.innerHTML = '<div class="starred-empty">⭐ まだお気に入りがありません。<br>フレーズ一覧の ★ ボタンで追加できます。</div>';
+    return;
+  }
+  const catMap = {action:{label:'行動',col:'a'},emotion:{label:'感情',col:'e'},social:{label:'やりとり',col:'s'}};
+  container.innerHTML = [...starred].map(sid => {
+    const [ti,cat,pi] = sid.split('_');
+    const h = DATA[+ti];
+    const p = h[cat][+pi];
+    return `<div class="bl-item" style="margin-bottom:8px">
+      <span class="bl-num" style="color:var(--gold)">${h.time}</span>
+      <div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:4px">${catMap[cat].label}</div>
+        <div class="bl-en">${p.en}</div>
+        <div class="bl-ja">${p.ja}</div>
+        <div class="bl-sit">📍 ${p.sit}</div>
+      </div>
+      <button class="bl-star starred" onclick="toggleStar('${sid}',this);renderStarred()">★</button>
+    </div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════
+   QUIZ
+══════════════════════════════════════════ */
+function buildQueue(timeIdx, cats) {
+  const queue = [];
+  const times = timeIdx === 'all' ? DATA.map((_,i)=>i) : [timeIdx];
+  times.forEach(ti => {
+    cats.forEach(cat => {
+      DATA[ti][cat].forEach((p,pi) => {
+        queue.push({ ti, cat, pi, ...p });
+      });
+    });
+  });
+  // shuffle
+  for (let i = queue.length-1; i>0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [queue[i],queue[j]] = [queue[j],queue[i]];
+  }
+  return queue;
+}
+
+function startQuiz(timeIdx) {
+  quizQueue = buildQueue(timeIdx, ['action','emotion','social']);
+  quizIdx = 0; quizScore = 0;
+  const modeLabels = { all:'全時間帯・全カテゴリ' };
+  document.getElementById('q-mode-label').textContent = '📚 ' + (modeLabels[timeIdx] || DATA[timeIdx]?.time+' '+DATA[timeIdx]?.title);
+  showScreen('quiz');
+  renderCard();
+}
+
+function startQuizFiltered() {
+  const cats = [...activeCats];
+  if (!cats.length) { alert('カテゴリを1つ以上選んでください'); return; }
+  quizQueue = buildQueue('all', cats);
+  quizIdx = 0; quizScore = 0;
+  const catNames = {action:'行動',emotion:'感情',social:'やりとり'};
+  document.getElementById('q-mode-label').textContent = '📚 ' + cats.map(c=>catNames[c]).join(' · ');
+  showScreen('quiz');
+  renderCard();
+}
+
+function renderCard() {
+  if (quizIdx >= quizQueue.length) { showResult(); return; }
+  const item = quizQueue[quizIdx];
+  quizRevealed = false;
+
+  const fill = Math.round(quizIdx/quizQueue.length*100);
+  document.getElementById('q-fill').style.width = fill+'%';
+  document.getElementById('q-counter').textContent = `${quizIdx+1} / ${quizQueue.length}`;
+
+  const catTag = document.getElementById('fc-cat-tag');
+  const catLabels = {action:'🏃 行動',emotion:'💭 感情',social:'💬 やりとり'};
+  const catCls = {action:'fc-cat-tag-a',emotion:'fc-cat-tag-e',social:'fc-cat-tag-s'};
+  catTag.textContent = catLabels[item.cat];
+  catTag.className = 'fc-cat-tag ' + catCls[item.cat];
+
+  document.getElementById('fc-time-label').textContent = DATA[item.ti].time + ' — ' + DATA[item.ti].title;
+  document.getElementById('fc-question').textContent = item.en;
+  document.getElementById('fc-hint').textContent = '📍 ' + item.sit;
+  document.getElementById('fc-ans-ja').textContent = item.ja;
+  document.getElementById('fc-ans-sit').textContent = item.sit;
+
+  const ans = document.getElementById('fc-answer');
+  ans.classList.remove('show');
+  document.getElementById('flash-card').classList.remove('revealed');
+  document.getElementById('judge-row').classList.add('hidden');
+}
+
+function revealCard() {
+  if (
